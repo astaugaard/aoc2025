@@ -21,7 +21,7 @@ jobs:
     - name: Get inputs
       run: git clone git@github.com:astaugaard/aoc2025_inputs.git
     - name: Move inputs
-      run: mv aoc2024_inputs inputs
+      run: mv aoc2025_inputs inputs
     - name: Run tests
       run: cargo test --verbose --release
     - name: remove inputs idk if needed
