@@ -57,9 +57,7 @@ fn part_b(input: &Input) -> Option<String> {
                     res += 1
                 }
 
-                dbg!(acc);
-
-                Some(dbg!(res))
+                Some(res)
             })
             .sum::<i16>()
             .to_string(),

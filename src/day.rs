@@ -2,12 +2,7 @@ use colored::Colorize;
 use core::fmt;
 use once_cell::sync::Lazy;
 use reqwest::header::USER_AGENT;
-use std::{
-    fs,
-    io::Read,
-    path::Path,
-    time::Instant,
-};
+use std::{fs, io::Read, path::Path, time::Instant};
 
 pub struct Day<A> {
     pub parser: Box<dyn Fn(String, bool) -> Result<A, String> + Sync + Send>,
@@ -89,7 +84,7 @@ where
 {
     println!(
         "{}",
-        format!("======= Day {:2} ========", number).bright_cyan()
+        format!("======= Day {:2} ========", number).bright_red()
     );
 
     // let file = fs::read_to_string(format!("inputs/day{}", number)).map_err(|e| format!("{e}"))?;
