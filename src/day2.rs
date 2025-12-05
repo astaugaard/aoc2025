@@ -101,9 +101,6 @@ fn compute_repititions_sized_sum_from_bounds(froms: &[usize], tos: &[usize], siz
         cur_t = if cur_t < tos[i] { tos[i] - 1 } else { tos[i] }
     }
 
-    dbg!(cur_f);
-    dbg!(cur_t);
-
     if cur_f > cur_t {
         return 0;
     }
@@ -117,15 +114,13 @@ fn compute_repititions_sized_sum_from_bounds(froms: &[usize], tos: &[usize], siz
         mult += 1;
     }
 
-    dbg!(sum) * dbg!(mult)
+    sum * mult
 }
 
 fn compute_repititions_sized_sum(from: &str, to: &str, size: usize) -> (usize, usize) {
     if to.len() - from.len() > 1 {
         panic!("case not considered")
     }
-
-    dbg!(size);
 
     let v = if from.len() > to.len() {
         return (0, 0);
