@@ -32,7 +32,6 @@ fn part_a_size(input: &Input, size: usize) -> Option<String> {
         x1.abs_diff(x2).pow(2) + y1.abs_diff(y2).pow(2) + z1.abs_diff(z2).pow(2)
     });
 
-    let mut num_connections = 0;
     let mut i = 0;
     let mut union_find = (0..input.len()).collect_vec();
     let mut sizes = vec![1; input.len()];
@@ -41,7 +40,6 @@ fn part_a_size(input: &Input, size: usize) -> Option<String> {
         let (from, to) = connections[i];
 
         if !in_same(&mut union_find, from, to) {
-            num_connections += 1;
             // only works here because in_same was just called
             // so we know the one pointed to is the last element
             let l = union_find[from];
@@ -128,7 +126,7 @@ pub static DAY: Lazy<day::Day<Input>> = Lazy::new(|| day::Day {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::utils::{self, finalanswer, finalanswerrange};
+    use crate::utils::{self, finalanswer};
 
     fn part_a_small(input: &Input) -> Option<String> {
         part_a_size(input, 10)

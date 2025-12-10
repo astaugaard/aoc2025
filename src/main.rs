@@ -69,6 +69,8 @@ fn main() {
         create_day(Lazy::force(&day12::DAY)),
     ];
 
+    rayon::ThreadPoolBuilder::new().build_global().unwrap();
+
     // let default_parallelism_approx = available_parallelism().unwrap().get();
 
     // println!("threads: {}", default_parallelism_approx);
