@@ -90,7 +90,7 @@ pub static DAY: Lazy<day::Day<Input>> = Lazy::new(|| day::Day {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::utils::{self, finalanswerrange};
+    use crate::utils::{self, finalanswer, finalanswerrange};
 
     #[test]
     fn goldens() {
@@ -100,6 +100,6 @@ mod tests {
 
     #[test]
     fn test_finalanswer() {
-        finalanswerrange(9, &DAY, None, None, vec![], Some(1472215589), None, vec![]);
+        finalanswer(9, &DAY, Some("4746238001"), Some("1552139370"), false);
     }
 }
