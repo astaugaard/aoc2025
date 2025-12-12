@@ -90,7 +90,7 @@ pub static DAY: Lazy<day::Day<Input>> = Lazy::new(|| day::Day {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::utils::{self, finalanswer, finalanswerrange};
+    use crate::utils::{self, finalanswer};
 
     #[test]
     fn goldens() {

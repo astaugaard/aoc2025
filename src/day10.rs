@@ -1,8 +1,5 @@
 use crate::day;
-use good_lp::{
-    coin_cbc, default_solver, solvers::coin_cbc::CoinCbcProblem, variable, variables, Expression,
-    Solution, SolverModel,
-};
+use good_lp::{default_solver, variable, variables, Expression, Solution, SolverModel};
 use itertools::Itertools;
 use once_cell::sync::Lazy;
 
@@ -139,7 +136,7 @@ pub static DAY: Lazy<day::Day<Input>> = Lazy::new(|| day::Day {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::utils::{self, finalanswer, finalanswerrange};
+    use crate::utils::{self, finalanswer};
 
     #[test]
     fn goldens() {

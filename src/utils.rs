@@ -1,9 +1,13 @@
+#[cfg(test)]
 use std::fs;
 
+#[cfg(test)]
 use once_cell::sync::Lazy;
 
+#[cfg(test)]
 use crate::day::Day;
 
+#[cfg(test)]
 pub fn golden<'a, Input>(
     file: &'a str,
     parent: &'a Lazy<Day<Input>>,
@@ -23,22 +27,22 @@ pub fn golden<'a, Input>(
         Err(err) => panic!("golden {} failed to parse: {}", file, err),
     };
 
-    let part_a = (*parent.part_a)(&input);
-    let part_b = (*parent.part_b)(&input);
-
     if let Some(_a) = expected_a {
+        let part_a = (*parent.part_a)(&input);
         if expected_a != part_a.as_deref() {
             panic!("golden {} expected {:?} got {:?}", file, expected_a, part_a);
         }
     }
 
     if let Some(_a) = expected_b {
+        let part_b = (*parent.part_b)(&input);
         if expected_b != part_b.as_deref() {
             panic!("golden {} expected {:?} got {:?}", file, expected_b, part_b);
         }
     }
 }
 
+#[cfg(test)]
 pub fn finalanswer<'a, Input>(
     daynum: usize,
     parent: &'a Lazy<Day<Input>>,
@@ -86,9 +90,10 @@ pub fn finalanswer<'a, Input>(
     }
 }
 
-pub fn finalanswerrange<'a, Input>(
+#[cfg(test)]
+pub fn finalanswerrange<Input>(
     daynum: usize,
-    parent: &'a Lazy<Day<Input>>,
+    parent: &Lazy<Day<Input>>,
     lower_bound_a: Option<i64>,
     upper_bound_a: Option<i64>,
     not_equal_a: Vec<i64>,
