@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    - name: install cbc
+      run: apt-get install cbc
     - name: Build
       run: cargo build --verbose --release
     - name: Setup SSH
