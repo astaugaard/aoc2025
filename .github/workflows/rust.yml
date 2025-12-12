@@ -12,7 +12,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: install cbc
-      run: sudo apt-get install coinor-cbc
+      run: sudo apt-get install coinor-libcbc-dev
     - name: Build
       run: cargo build --verbose --release
     - name: Setup SSH
