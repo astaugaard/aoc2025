@@ -1,8 +1,6 @@
 use crate::day;
-use good_lp::{default_solver, variable, variables, Expression, Solution, SolverModel};
 use itertools::Itertools;
 use num_rational::Rational32;
-use num_traits::sign::Signed;
 use rayon::iter::IntoParallelRefIterator;
 use rayon::iter::ParallelIterator;
 use once_cell::sync::Lazy;
@@ -397,37 +395,6 @@ fn brute_force_minimal_solution_go_b(
             }
         }
     }
-}
-fn solve_b(a: &Machine) -> usize {
-    let mut variables = variables! {};
-
-    let buttons = variables.add_vector(variable().integer().min(0), a.buttons.len());
-
-    let mut expressions = vec![Expression::with_capacity(0); a.joltages.len()];
-
-    for (i, button) in a.buttons.iter().enumerate() {
-        for flip in button {
-            expressions[*flip] += buttons[i];
-        }
-    }
-
-    let minimization: Expression = buttons.iter().sum1().unwrap();
-
-    let mut system = variables.minimise(&minimization).using(default_solver);
-
-    system.set_parameter("log", "0");
-
-    let solution = system
-        .with_all(
-            expressions
-                .into_iter()
-                .enumerate()
-                .map(|(i, ex)| ex.eq(a.joltages[i])),
-        )
-        .solve()
-        .unwrap();
-
-    solution.eval(&minimization) as usize
 }
 
 fn diff_solution_b(a: &[Vec<Rational32>], current_sums: &Vec<Rational32>) -> Option<usize> {
