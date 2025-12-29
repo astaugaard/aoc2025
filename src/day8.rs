@@ -25,7 +25,7 @@ fn part_a_size(input: &Input, size: usize) -> Option<String> {
         .flat_map(|i| (0..input.len()).filter_map(move |j| if i < j { Some((i, j)) } else { None }))
         .collect_vec();
 
-    connections.sort_unstable_by_key(|(a, b)| {
+    connections.sort_by_cached_key(|(a, b)| {
         let (x1, y1, z1) = input[*a];
         let (x2, y2, z2) = input[*b];
 
@@ -52,7 +52,11 @@ fn part_a_size(input: &Input, size: usize) -> Option<String> {
         i += 1;
     }
 
-    let (_, a, aft) = sizes.select_nth_unstable(input.len() - 3);
+    // sizes.retain(|i| *i != 0);
+
+    let third_last = sizes.len() - 3;
+
+    let (_, a, aft) = sizes.select_nth_unstable(third_last);
 
     Some((*a * aft.iter().product::<u64>()).to_string())
 }
@@ -61,15 +65,20 @@ fn in_same(union_find: &mut [usize], a: usize, b: usize) -> bool {
     find_set(union_find, a) == find_set(union_find, b)
 }
 
-fn find_set(union_find: &mut [usize], a: usize) -> usize {
-    if union_find[a] == a {
-        return a;
+fn find_set(union_find: &mut [usize], mut a: usize) -> usize {
+    let mut root = a;
+
+    while union_find[root] != root {
+        root = union_find[root];
     }
 
-    let res = find_set(union_find, union_find[a]);
-    union_find[a] = res;
+    while a != root {
+        let next = union_find[a];
+        union_find[a] = root;
+        a = next
+    }
 
-    res
+    root
 }
 
 fn part_a(input: &Input) -> Option<String> {
@@ -81,7 +90,7 @@ fn part_b(input: &Input) -> Option<String> {
         .flat_map(|i| (0..input.len()).filter_map(move |j| if i < j { Some((i, j)) } else { None }))
         .collect_vec();
 
-    connections.sort_unstable_by_key(|(a, b)| {
+    connections.sort_by_cached_key(|(a, b)| {
         let (x1, y1, z1) = input[*a];
         let (x2, y2, z2) = input[*b];
 
@@ -111,7 +120,6 @@ fn part_b(input: &Input) -> Option<String> {
     }
 
     let (f,t) = connections[i - 1];
-
 
     Some((input[f].0 * input[t].0).to_string())
 }
